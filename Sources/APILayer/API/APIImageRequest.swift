@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class APIImageRequest {
+public class APIImageRequest {
     
     private var client: APIHTTPClientType
     

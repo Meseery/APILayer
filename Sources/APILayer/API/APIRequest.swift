@@ -10,7 +10,7 @@ enum HttpEncoding {
     case JSONEncoding
 }
 
-class APIRequest<T: Decodable> {
+public class APIRequest<T: Decodable> {
     
     private var route: APIRoute
     private var httpClient: APIHTTPClientType!

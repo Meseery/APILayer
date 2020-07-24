@@ -1,6 +1,6 @@
 import UIKit
 
-class ImageDownloadManager {
+public class ImageDownloadManager {
     
     static let shared = ImageDownloadManager()
     

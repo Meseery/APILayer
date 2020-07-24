@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIImageView {
+public extension UIImageView {
     struct ImageView {
         static var imageURLKey: Void?
     }

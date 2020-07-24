@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIImage {
+public extension UIImage {
     func resizedImageWith(image: UIImage, targetSize: CGSize) -> UIImage? {
         let imageSize = image.size
         let newWidth  = targetSize.width  / image.size.width

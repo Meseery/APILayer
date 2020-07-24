@@ -1,6 +1,6 @@
 import UIKit
 
-class ImageDownloadOperation: Operation {
+public class ImageDownloadOperation: Operation {
     
     private var request: APIImageRequest?
     private var downloadTask: URLSessionTask?
