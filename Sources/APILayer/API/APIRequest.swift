@@ -1,16 +1,16 @@
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
 }
 
-enum HttpEncoding {
+public enum HttpEncoding {
     case ParameterEncoding
     case JSONEncoding
 }
 
-public class APIRequest<T: Decodable> {
+open class APIRequest<T: Decodable> {
     
     private var route: APIRoute
     private var httpClient: APIHTTPClientType!
@@ -20,23 +20,23 @@ public class APIRequest<T: Decodable> {
         httpClient = APIHTTPClient()
     }
     
-    func getParameters() -> [String: Any] {
+    open func getParameters() -> [String: Any] {
         return [:]
     }
     
-    func getHeaders() -> [String: String] {
+    open func getHeaders() -> [String: String] {
         return [:]
     }
     
-    func changeAPIClient(client: APIHTTPClientType) {
+    open func changeAPIClient(client: APIHTTPClientType) {
         self.httpClient = client
     }
     
-    func cancel() {
+    open func cancel() {
         httpClient.cancel()
     }
     
-    func response(completion: @escaping (Result<T, APIError>) -> Void) {
+    public func response(completion: @escaping (Result<T, APIError>) -> Void) {
         do {
             let urlRequest = try asURLRequest()
             httpClient.dataTask(urlRequest: urlRequest) { (result) in

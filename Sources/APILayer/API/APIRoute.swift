@@ -12,11 +12,11 @@ public class APIRoute {
         self.encoding = encoding
     }
     
-    static func getRoute(path: String) -> APIRoute {
+    public static func getRoute(path: String) -> APIRoute {
         return APIRoute(path: path, method: .get, encoding: HttpEncoding.ParameterEncoding)
     }
     
-    static func postRoute(path: String) -> APIRoute {
+    public static func postRoute(path: String) -> APIRoute {
         return APIRoute(path: path, method: .post, encoding: HttpEncoding.JSONEncoding)
     }
 }

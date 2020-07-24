@@ -14,7 +14,7 @@ public extension UIImageView {
         }
     }
     
-    func load(url: String, indexPath: IndexPath) {
+    public func load(url: String, indexPath: IndexPath) {
         if let previousURL = imageURL {
             ImageDownloadManager.shared.changeDownloadPriorityToSlow(of: previousURL)
         }
@@ -29,7 +29,7 @@ public extension UIImageView {
         }
     }
     
-    func load(url: String) {
+    public func load(url: String) {
         ImageDownloadManager.shared.download(url: url, indexPath: nil, size: self.frame.size) { (image, url, indexPathh, error) in
             if let _image = image {
                 DispatchQueue.main.async {
@@ -39,7 +39,7 @@ public extension UIImageView {
         }
     }
     
-    func resizedImageWith(image: UIImage, targetSize: CGSize) -> UIImage? {
+    public func resizedImageWith(image: UIImage, targetSize: CGSize) -> UIImage? {
         return image.resizedImageWith(image: image, targetSize: targetSize)
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 
 public class ImageDownloadManager {
     
-    static let shared = ImageDownloadManager()
+    public static let shared = ImageDownloadManager()
     
     public typealias ImageDownloadHandler = (_ image: UIImage?, _ url: String, _ indexPath: IndexPath?, _ error: APIError?) -> Void
 
@@ -96,11 +96,11 @@ public class ImageDownloadManager {
         operation.queuePriority = .low
     }
     
-    func cancelAll() {
+    public func cancelAll() {
         imageDownloadQueue.cancelAllOperations()
     }
     
-    func cancelOperation(imageUrl: String) {
+    public func cancelOperation(imageUrl: String) {
         if let imageOperations = imageDownloadQueue.operations as? [ImageDownloadOperation],
             let operation = imageOperations.first(where: { $0.imagePath == imageUrl }) {
             operation.cancel()
