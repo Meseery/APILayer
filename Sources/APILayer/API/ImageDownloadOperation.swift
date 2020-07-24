@@ -22,7 +22,7 @@ public class ImageDownloadOperation: Operation {
         self.fileManager = fileManager
     }
     
-    override func main() {
+    public override func main() {
         guard isCancelled == false else {
             finish(true)
             return
@@ -31,11 +31,11 @@ public class ImageDownloadOperation: Operation {
         load()
     }
     
-    override func cancel() {
+    public override func cancel() {
         request?.cancel()
     }
     
-    override var isExecuting: Bool {
+    public override var isExecuting: Bool {
         return _executing
     }
     
@@ -48,7 +48,7 @@ public class ImageDownloadOperation: Operation {
         }
     }
     
-    override var isFinished: Bool {
+    public override var isFinished: Bool {
         return _finished
     }
     

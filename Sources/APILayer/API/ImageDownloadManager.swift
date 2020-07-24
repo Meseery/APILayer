@@ -4,7 +4,7 @@ public class ImageDownloadManager {
     
     static let shared = ImageDownloadManager()
     
-    typealias ImageDownloadHandler = (_ image: UIImage?, _ url: String, _ indexPath: IndexPath?, _ error: APIError?) -> Void
+    public typealias ImageDownloadHandler = (_ image: UIImage?, _ url: String, _ indexPath: IndexPath?, _ error: APIError?) -> Void
 
     lazy var imageDownloadQueue: OperationQueue = {
         var queue = OperationQueue()
