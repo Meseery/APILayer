@@ -15,7 +15,7 @@ open class APIRequest<T: Decodable> {
     private var route: APIRoute
     private var httpClient: APIHTTPClientType!
     
-    init(route: APIRoute) {
+    public init(route: APIRoute) {
         self.route = route
         httpClient = APIHTTPClient()
     }
