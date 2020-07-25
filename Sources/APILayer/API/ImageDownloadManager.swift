@@ -32,7 +32,9 @@ public class ImageDownloadManager {
     }
     
     public func download(url: String, indexPath: IndexPath?, size: CGSize, completion: @escaping ImageDownloadHandler) {
-        if url.isEmpty { return }
+        if url.isEmpty {
+            return
+        }
         
         let requiredUrl = "\(url)\(size.width)x\(size.height)"
         
@@ -56,12 +58,12 @@ public class ImageDownloadManager {
         let imageOperation = ImageDownloadOperation(url: url, size: size, indexPath: indexPath, cacheDir: cacheDir, fileManager: fileManager)
         imageOperation.queuePriority = .veryHigh
         imageOperation.downloadCompletionHandler = { [unowned self] (image, url, indexPath, error) in
-            if let _image = image,
-                let scaledImage = _image.resizedImageWith(image: _image, targetSize: size) {
+            if let image = image,
+                let scaledImage = image.resizedImageWith(image: image, targetSize: size) {
                 let requiredUrl = "\(url)\(size.width)x\(size.height)"
-                self.cacheImage(originalImage: _image, scaledImage: scaledImage, url: url, size: size)
+                self.cacheImage(originalImage: image, scaledImage: scaledImage, url: url, size: size)
                 self.imageCache.setObject(scaledImage, forKey: requiredUrl as NSString)
-                completion(_image, url, indexPath, error)
+                completion(image, url, indexPath, error)
             }
         }
         imageDownloadQueue.addOperation(imageOperation)
@@ -73,8 +75,8 @@ public class ImageDownloadManager {
             let originalFile = self.cacheDir.appendingPathComponent("\(fileName)")
             let scaleFile = self.cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
             
-            if let _origImage = originalImage, !self.fileManager.fileExists(atPath: originalFile.relativePath) {
-                try? _origImage.jpegData(compressionQuality: 1)?.write(to: originalFile)
+            if let origImage = originalImage, !self.fileManager.fileExists(atPath: originalFile.relativePath) {
+                try? origImage.jpegData(compressionQuality: 1)?.write(to: originalFile)
             }
             
             if let _scaleImage = scaledImage, !self.fileManager.fileExists(atPath: scaleFile.relativePath) {
@@ -88,7 +90,7 @@ public class ImageDownloadManager {
             return
         }
         let imageOperations = ongoingOpertions.filter {
-            $0.imagePath == url && $0.isFinished == false && $0.isExecuting == true
+            $0.imagePath == url && !$0.isFinished && $0.isExecuting
         }
         guard let operation = imageOperations.first else {
             return
