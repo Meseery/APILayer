@@ -22,14 +22,10 @@ public class APIImageRequest {
                         completion(url, nil, APIError.somethingWentWrong)
                     }
                 }
-                break
-                
             case .failure(let error):
                 DispatchQueue.main.async {
                     completion(url, nil, error)
                 }
-
-                break
             }
         }
     }

@@ -36,10 +36,10 @@ public class ImageDownloadOperation: Operation {
     }
     
     public override var isExecuting: Bool {
-        return _executing
+        return backExecuting
     }
     
-    private var _executing: Bool = false {
+    private var backExecuting: Bool = false {
         willSet {
             willChangeValue(forKey: "isExecuting")
         }
@@ -49,10 +49,10 @@ public class ImageDownloadOperation: Operation {
     }
     
     public override var isFinished: Bool {
-        return _finished
+        return backFinished
     }
     
-    private var _finished = false {
+    private var backFinished = false {
         willSet {
             willChangeValue(forKey: "isFinished")
         }
@@ -62,11 +62,11 @@ public class ImageDownloadOperation: Operation {
     }
     
     private func executing(_ executing: Bool) {
-        _executing = executing
+        backExecuting = executing
     }
     
     private func finish(_ finished: Bool) {
-        _finished = finished
+        backFinished = finished
     }
     
     private func download() {
@@ -120,12 +120,12 @@ public class ImageDownloadOperation: Operation {
         let originalFile = self.cacheDir.appendingPathComponent("\(fileName)")
         let scaleFile = self.cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
         
-        if let _origImage = originalImage, !self.fileManager.fileExists(atPath: originalFile.relativePath) {
-            try? _origImage.jpegData(compressionQuality: 1)?.write(to: originalFile)
+        if let origImage = originalImage, !self.fileManager.fileExists(atPath: originalFile.relativePath) {
+            try? origImage.jpegData(compressionQuality: 1)?.write(to: originalFile)
         }
         
-        if let _scaleImage = scaledImage, !self.fileManager.fileExists(atPath: scaleFile.relativePath) {
-            try? _scaleImage.jpegData(compressionQuality: 1)?.write(to: scaleFile)
+        if let scaleImage = scaledImage, !self.fileManager.fileExists(atPath: scaleFile.relativePath) {
+            try? scaleImage.jpegData(compressionQuality: 1)?.write(to: scaleFile)
         }
     }
 }
